@@ -104,6 +104,21 @@
     background: #F19F4D;
     transition: all 0.5s ease-out; }
 
+.search-box input {
+  width: 90%;
+  font-size: 2rem;
+  border-radius: 20px;
+  padding: 2px 0 2px 15px;
+  border: none;
+  margin-top: 5px; }
+  .search-box input:focus {
+    outline: none; }
+
+.search-box .search-input {
+  color: #4484CE; }
+  .search-box .search-input::placeholder {
+    opacity: 0.5; }
+
 * {
   box-sizing: border-box; }
 

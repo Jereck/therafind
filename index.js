@@ -34,24 +34,28 @@ app.get('/', (req, res) => {
 
 app.post('/search', (req, res) => {
     let searchParam = req.body.search;
-    let sql = `SELECT * FROM therapies WHERE state = '${searchParam}'`;
+    let sql = `SELECT * FROM therapies WHERE 
+                state = '${searchParam}'
+                or city ='${searchParam}'
+                or zip = '${searchParam}'`;
     let query = db.query(sql, (err, results) => {
         if (err) throw err;
-        res.render('search-results', {
+        res.render('therapies', {
             therapies: results
         });
+
     });
 });
 
-app.get('/therapies', (req, res) => {
-    let therapies = 'SELECT * FROM therapies';
-    let query = db.query(therapies, (err, result) => {
-        if (err) throw err;
-        res.render("therapies", {
-            therapies: result
-        });
-    });
-});
+// app.get('/therapies', (req, res) => {
+//     let therapies = 'SELECT * FROM therapies';
+//     let query = db.query(therapies, (err, result) => {
+//         if (err) throw err;
+//         res.render("therapies", {
+//             therapies: result
+//         });
+//     });
+// });
 
 app.get('/register', (req, res) => {
     res.render("register");
