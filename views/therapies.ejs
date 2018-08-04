@@ -1,0 +1,17 @@
+<% include partials/header %>
+
+<div class="header">
+    <h1>Therapies</h1>
+</div>
+
+<div class="container">
+
+    <% therapies.forEach(function(therapy) { %>
+        <div class="therapy-card">
+            <h4><%= therapy.name %></h4>
+            <em><%= therapy.type %></em>
+        </div>
+    <% }); %>
+</div>
+
+<% include partials/footer %>
