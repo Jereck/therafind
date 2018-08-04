@@ -1,36 +1,8 @@
-$primary-color: #4484CE;
-$secondary-color: #D9D9D9;
-$third-color: #F9CF00;
-$fourth-color: #F19F4D;
-$show-home-image: true;
-$home-image: url(/images/background.jpg);
-$background-opacity: 0.7;
+@import 'config';
+@import 'menu';
+
 @import url('https://fonts.googleapis.com/css?family=Montserrat:100,300,400,700');
 
-@mixin easeOut {
-    transition: all 0.5s ease-out;
-}
-
-@mixin background {
-    @if $show-home-image {
-        &#bg-img {
-            background: $home-image;
-            background-attachment: fixed;
-            background-size: cover;
-
-            &:after {
-                content: '';
-                position: absolute;
-                top: 0;
-                right: 0;
-                width: 100%;
-                height: 100%;
-                z-index: -1;
-                background: rgba($primary-color, $background-opacity);
-            }
-        }
-    }
-}
 
 * {
     box-sizing: border-box;
@@ -42,6 +14,7 @@ body {
     height: 100%;
     margin: 0;
     line-height: 1.5;
+    font-family: 'Montserrat', sans-serif;
     color: white;
 }
 
@@ -49,7 +22,6 @@ body {
 h1, h2, h3 {
     margin: 0;
     font-weight: 300;
-    font-family: 'Montserrat', sans-serif;
 
     &.lg-heading {
         font-size: 3rem;
