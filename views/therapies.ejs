@@ -1,17 +1,24 @@
 <% include partials/header %>
 
-<div class="header">
-    <h1>Therapies</h1>
-</div>
+<main id="therapies">
+    <h1 class="lg-heading">
+        Therapies
+    </h1>
+    <h2 class="sm-heading">
+        A list of therapies in your area
+    </h2>
 
-<div class="container">
+    <div class="therapy-info">
+        <% therapies.forEach(function(therapy) { %>
+            <div class="therapy therapy-<%= therapy.id %>">
+                <h4><%= therapy.name %></h4>
+                <em><%= therapy.type %></em>
+            </div>
+        <% }); %>
+    </div>
+</main>
 
-    <% therapies.forEach(function(therapy) { %>
-        <div class="therapy-card">
-            <h4><%= therapy.name %></h4>
-            <em><%= therapy.type %></em>
-        </div>
-    <% }); %>
-</div>
+    
+
 
 <% include partials/footer %>

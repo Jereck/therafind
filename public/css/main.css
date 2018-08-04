@@ -92,7 +92,7 @@ body {
   margin: 0;
   line-height: 1.5;
   font-family: 'Montserrat', sans-serif;
-  color: white; }
+  color: #fff; }
   body#bg-img {
     background: url(/images/background.jpg);
     background-attachment: fixed;
@@ -128,3 +128,56 @@ main {
     overflow: hidden; }
     main#home h1 {
       margin-top: 20vh; }
+
+.therapy-info {
+  display: grid;
+  grid-gap: 0.7rem;
+  grid-template-columns: repeat(3, 1fr); }
+  .therapy-info .therapy {
+    background: #5891d3;
+    padding: 0.5rem;
+    border-bottom: #D9D9D9 5px solid; }
+    .therapy-info .therapy:hover {
+      opacity: 0.7;
+      border-color: #D9D9D9;
+      transition: all 0.5s ease-out; }
+
+@media screen and (min-width: 1171px) {
+  .therapies {
+    grid-template-columns: repeat(4, 1fr); } }
+
+@media screen and (min-width: 769px) and (max-width: 1170px) {
+  .therapies {
+    grid-template-columns: repeat(3, 1fr); } }
+
+@media screen and (max-width: 768px) {
+  main {
+    align-items: center;
+    text-align: center; }
+    main .lg-heading {
+      line-height: 1;
+      margin-bottom: 1rem; }
+  ul.menu-nav, div.menu-branding {
+    float: none;
+    width: 100%;
+    min-height: 0; }
+    ul.menu-nav.show, div.menu-branding.show {
+      transform: translate3d(0, 0, 0); }
+  .menu-nav {
+    height: 75vh;
+    transform: translate3d(-100%, 0, 0);
+    font-size: 24px; }
+  .menu-branding {
+    height: 25vh;
+    transform: translate3d(100%, 0, 0); }
+  .therapy-info {
+    grid-template-areas: 'featured' 'therapy-1' 'therapy-2' 'therapy-3' 'therapy-4' 'therapy-5';
+    grid-template-columns: 1fr; }
+  .therapies {
+    grid-template-columns: repeat(2, 1fr); } }
+
+@media screen and (max-width: 500px) {
+  main#home h1 {
+    margin-top: 10vh; }
+  .therapies {
+    grid-template-columns: 1fr; } }

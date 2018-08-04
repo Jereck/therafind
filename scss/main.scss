@@ -15,7 +15,7 @@ body {
     margin: 0;
     line-height: 1.5;
     font-family: 'Montserrat', sans-serif;
-    color: white;
+    color: #fff;
 }
 
 // Headings
@@ -50,3 +50,24 @@ main {
         }
     }
 }
+
+.therapy-info {
+    display: grid;
+    grid-gap: 0.7rem;
+    grid-template-columns: repeat(3, 1fr);
+    
+    .therapy {
+        background: lighten($primary-color, 5);
+        padding: 0.5rem;
+        border-bottom: $secondary-color 5px solid;
+
+        &:hover {
+            opacity: 0.7;
+            border-color: $secondary-color;
+            @include easeOut;
+        }
+    }
+}
+
+
+@import 'mobile';
