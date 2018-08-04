@@ -1,0 +1,18 @@
+<% include partials/header %>
+
+<main id="search-results">
+    <h1 class="lg-heading">
+        Therapies
+    </h1>
+
+    <% therapies.forEach(function(therapy) { %>
+        <div class="therapy therapy-<%= therapy.id %>">
+            <h4><%= therapy.name %></h4>
+            <em><%= therapy.type %></em>
+            <h5><%= therapy.state %></h5>
+        </div>
+    <% }); %>
+</main>
+
+
+<% include partials/footer %>

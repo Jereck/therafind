@@ -32,6 +32,17 @@ app.get('/', (req, res) => {
     res.render('index');
 });
 
+app.post('/search', (req, res) => {
+    let searchParam = req.body.search;
+    let sql = `SELECT * FROM therapies WHERE state = '${searchParam}'`;
+    let query = db.query(sql, (err, results) => {
+        if (err) throw err;
+        res.render('search-results', {
+            therapies: results
+        });
+    });
+});
+
 app.get('/therapies', (req, res) => {
     let therapies = 'SELECT * FROM therapies';
     let query = db.query(therapies, (err, result) => {
@@ -87,6 +98,14 @@ app.get('/getwashington', (req, res) => {
         res.send(result);
     });
 });
+
+app.get('/gettherapy/:id', (req, res) => {
+    let sql = `SELECT * FROM therapies WHERE id = ${req.params.id}`;
+    let query = db.query(sql, (err, result) => {
+        if (err) throw err;
+        console.log(result);
+    })
+})
 
 
 app.listen('3000', () => {
