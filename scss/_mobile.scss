@@ -64,8 +64,13 @@
 
 // Smartphones
 @include mediaSm {
-    main#home h1 {
+    main#home h1, main#therapies h1, main#register h1 {
         margin-top: 10vh;
+        font-size: 3rem;
+    }
+
+    main#home h2, main#therapies h2, main#register h2 {
+        font-size: 1rem;
     }
 
     .therapies {

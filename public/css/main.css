@@ -83,42 +83,26 @@
 .nav-item:nth-child(4) {
   transition-delay: 0.4s; }
 
-.search-box {
+#register-box form {
+  padding: 10px; }
+
+#register-box input {
+  display: block;
   width: 100%;
-  position: relative; }
+  height: 40px;
+  margin-bottom: 5px;
+  font-size: 26px; }
 
-.search-input {
-  float: left;
-  width: 50vw;
-  border: 3px solid #F19F4D;
+#register-box .button {
+  margin-top: 5px;
   padding: 5px;
-  height: 100px;
-  border-radius: 5px;
-  outline: none;
-  color: #9DBFAF;
-  font-size: 24px; }
-  .search-input:focus {
-    color: #00B4CC; }
-
-.search-button {
-  position: absolute;
-  right: 0;
-  width: 50px;
-  height: 100px;
-  border: 1px solid #F19F4D;
-  background: #F19F4D;
-  text-align: center;
-  color: #FFF;
-  border-radius: 80px 5px 5px 80px;
-  cursor: pointer;
-  font-size: 36px; }
-
-.wrap {
-  width: 50vw;
-  position: absolute;
-  top: 55%;
-  left: 50%;
-  transform: translate(-50%, -50%); }
+  width: 150px;
+  border: none;
+  border-radius: 10px;
+  background: #F9CF00; }
+  #register-box .button:hover {
+    background: #F19F4D;
+    transition: all 0.5s ease-out; }
 
 * {
   box-sizing: border-box; }
@@ -129,7 +113,7 @@ body {
   margin: 0;
   line-height: 1.5;
   font-family: 'Montserrat', sans-serif;
-  color: #fff; }
+  color: white; }
   body#bg-img {
     background: url(/images/background.jpg);
     background-attachment: fixed;
@@ -142,7 +126,7 @@ body {
       width: 100%;
       height: 100%;
       z-index: -1;
-      background: rgba(68, 132, 206, 0.7); }
+      background: rgba(68, 132, 206, 0.5); }
 
 h1, h2, h3 {
   margin: 0;
@@ -214,7 +198,10 @@ main {
     grid-template-columns: repeat(2, 1fr); } }
 
 @media screen and (max-width: 500px) {
-  main#home h1 {
-    margin-top: 10vh; }
+  main#home h1, main#therapies h1, main#register h1 {
+    margin-top: 10vh;
+    font-size: 3rem; }
+  main#home h2, main#therapies h2, main#register h2 {
+    font-size: 1rem; }
   .therapies {
     grid-template-columns: 1fr; } }

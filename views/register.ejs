@@ -2,44 +2,10 @@
 
 <main id="register">
     <h1 class="lg-heading">
-        <h1>Register!</h1>
+        Register
     </h1>
-    <h2 class="sm-heading">
-        Register your business today!
-    </h2>
 
-    <div class="form-container">
-        <form method="POST" action="/register">           
-            <label>Company Name:</label>
-            <input type="text" name="therapy[name]" id="name" placeholder="The Company">
-    
-            <label>Address 1:</label>
-            <input type="text" name="therapy[street1]" id="street1" placeholder="123 Fake Stree"> 
-
-            <label>Address 2:</label>
-            <input type="text" name="therapy[street2]" id="street2" placeholder="PO Box 123">
-
-            <label>City:</label>
-            <input type="text" name="therapy[city]" id="city" placeholder="Seattle">
-
-            <label>State:</label>
-            <input type="text" name="therapy[state]" id="state" placeholder="Washington">
-
-            <label>Zip Code:</label>
-            <input type="text" name="therapy[zip]" id="zip" placeholder="12345">
-
-            <label>Type of Therapy:</label>
-            <input type="text" name="therapy[type]" id="type" placeholder="ABA Therapy">
-
-            <label>Website:</label>
-            <input type="text" name="therapy[website]" id="website" placeholder="http://www.example.com">
-
-            <label>Email:</label>
-            <input type="email" name="therapy[email]" id="email" placeholder="johndoe@gmail.com">
-            
-            <button type="submit" class="register-btn">Register</button>
-        </form>
-    </div>
+    <% include partials/register-form %>
 </main>
     
 <% include partials/footer %>
