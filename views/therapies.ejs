@@ -8,14 +8,19 @@
         A list of therapies in your area
     </h2>
 
-    <div class="therapy-info">
-        <% therapies.forEach(function(therapy) { %>
-            <div class="therapy therapy-<%= therapy.id %>">
-                <h4><%= therapy.name %></h4>
-                <em><%= therapy.type %></em>
-            </div>
-        <% }); %>
-    </div>
+    <% if (therapies.length < 1) { %>
+        <p>There are no therapies to show.</p>
+    <% } else { %>
+        <div class="therapy-info">
+            <% therapies.forEach(function(therapy) { %>
+                <div class="therapy therapy-<%= therapy.id %>">
+                    <h4><%= therapy.name %></h4>
+                    <em><%= therapy.type %></em>
+                </div>
+            <% }); %>
+        </div>
+    <% } %>
+    
 </main>
 
     

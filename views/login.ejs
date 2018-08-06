@@ -1,0 +1,13 @@
+<% include partials/header %>
+
+<form action="/login" method="POST">
+    <label>Email:</label>
+    <input type='email' name='login[email]' id="email" />
+
+    <label>Password:</label>
+    <input type='password' name='login[password]'  id="password" />
+
+    <button class="button">Login</button>
+</form>
+
+<% include partials/footer %>

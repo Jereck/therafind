@@ -1,32 +1,65 @@
 <div id="register-box">
-    <form method="POST" action="/register">           
-        <label>Company Name:</label>
-        <input type="text" name="therapy[name]" id="name" required>
-    
-        <label>Address 1:</label>
-        <input type="text" name="therapy[street1]" id="street1" required> 
-    
-        <label>Address 2:</label>
-        <input type="text" name="therapy[street2]" id="street2">
-    
-        <label>City:</label>
-        <input type="text" name="therapy[city]" id="city" required>
-    
-        <label>State:</label>
-        <input type="text" name="therapy[state]" id="state" required>
-    
-        <label>Zip Code:</label>
-        <input type="text" name="therapy[zip]" id="zip" required>
-    
-        <label>Type of Therapy:</label>
-        <input type="text" name="therapy[type]" id="type" required>
-    
-        <label>Website:</label>
-        <input type="text" name="therapy[website]" id="website" required
-    
-        <label>Email:</label>
-        <input type="email" name="therapy[email]" id="email" required>
+
+    <form method="POST" action="/register">
+        <div class="login-info">
+            <h4><span class="number-circle">1</span> Login Information</h4>
+            <div class="form-field">
+                <label>Email:</label>
+                <input type="email" name="therapy[email]" id="email" required>
+            </div>
+            <div class="form-field">
+                <label>Password:</label>
+                <input type="password" name="therapy[password]" id="password" required>
+            </div>
+            <div class="form-field">
+                <label>Re-enter:</label>
+                <input type="password" name="therapy[repassword]" id="repassword" required>
+            </div>
+        </div>
+
+        <div class="basic-info">
+            <h4><span class="number-circle">2</span> Basic Information</h4>
+            <div class="form-field">
+                <label>Company Name:</label>
+                <input type="text" name="therapy[name]" id="name" required>
+            </div>
+            <div class="form-field">
+                <label>Address 1:</label>
+                <input type="text" name="therapy[street1]" id="street1" required> 
+            </div>
+            <div class="form-field">
+                <label>Address 2:</label>
+                <input type="text" name="therapy[street2]" id="street2">
+            </div>
+            <div class="form-field">
+                <label>City:</label>
+                <input type="text" name="therapy[city]" id="city" class="city" required>
+            </div>
+            <div class="form-field">
+                <label>State:</label>
+                <input type="text" name="therapy[state]" id="state" class="state" required>
+            </div>
+            <div class="form-field">
+                <label>Zip Code:</label>
+                <input type="text" name="therapy[zip]" id="zip" class="zip" required>
+            </div>       
+        </div>
         
-        <button class="button">Register</button>
+        <div class="company-info">
+            <h4><span class="number-circle">3</span> About the Company</h4>
+            <div class="form-field">
+                <label>Type of Therapy:</label>
+                <input type="text" name="therapy[type]" id="type" required>
+            </div>
+            <div class="form-field">
+                <label>Website:</label>
+                <input type="text" name="therapy[website]" id="website" required >
+            </div>
+        </div>
+
+        <div class="submit-button">
+            <button class="button">Register</button>
+        </div>
+
     </form>
 </div>

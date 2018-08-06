@@ -2,15 +2,17 @@ const express = require('express'),
     mysql = require('mysql'),
     bodyParser = require('body-parser'),
     passport = require('passport'),
+    flash = require('connect-flash'),
+    crypto = require('crypto'),
+    sess = require('express-session'),
     LocalStrategy = require('passport-local'),
-
-    User = require('./models/user'),
     app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+
 app.use(express.static(__dirname + "/public"));
 app.use(express.static(__dirname + "/views"));
 
@@ -52,6 +54,10 @@ app.post('/search', (req, res) => {
     });
 });
 
+app.get('/contact', (req, res) => {
+    res.render('contact');
+})
+
 // app.get('/therapies', (req, res) => {
 //     let therapies = 'SELECT * FROM therapies';
 //     let query = db.query(therapies, (err, result) => {
@@ -73,9 +79,14 @@ app.post('/register', (req, res) => {
     let query = db.query(sql, therapy, (err, result) => {
         if (err) throw err;
         console.log(result);
-        res.redirect('/therapies');
+        res.redirect('/');
     });
 });
+
+app.get('/login', (req, res) => {
+    res.render('login');
+});
+
 
 app.get('/createtable', (req, res) => {
     var sql = 'CREATE TABLE therapies(id int AUTO_INCREMENT, name VARCHAR(255), street1 VARCHAR(255), street2 VARCHAR(255), city VARCHAR(255), state VARCHAR(255), zip VARCHAR(255), type VARCHAR(255), website VARCHAR(255), PRIMARY KEY(id))';
@@ -94,17 +105,10 @@ app.get('/droptable', (req, res) => {
 });
 
 app.get('/addfield', (req, res) => {
-    var sql = "ALTER TABLE therapies ADD COLUMN email VARCHAR(255)";
+    var sql = "ALTER TABLE therapies ADD COLUMN repassword VARCHAR(255)";
     db.query(sql, (err, result) => {
         if (err) throw err;
-        res.send("Email column added to table");
-    });
-});
-
-app.get('/getwashington', (req, res) => {
-    db.query("SELECT * FROM therapies WHERE state = 'Washington'", (err, result, fields) => {
-        if(err) throw err;
-        res.send(result);
+        res.send("RePassword column added to table");
     });
 });
 
