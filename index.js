@@ -1,6 +1,10 @@
 const express = require('express'),
     mysql = require('mysql'),
     bodyParser = require('body-parser'),
+    passport = require('passport'),
+    LocalStrategy = require('passport-local'),
+
+    User = require('./models/user'),
     app = express();
 
 app.use(bodyParser.json());
