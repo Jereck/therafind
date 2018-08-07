@@ -98,21 +98,22 @@
     background: white;
     border-radius: 5px; }
   #register-box input {
-    display: block;
+    display: flex;
     width: 100%;
     height: 40px;
     margin-bottom: 15px;
-    font-size: 26px;
+    font-size: 20px;
     background: #ecebeb;
     border: none;
     border-radius: 8px;
     padding-left: 10px; }
-  #register-box .form-field {
-    display: inline-block; }
   #register-box .basic-info, #register-box .login-info, #register-box .company-info {
     border-bottom: 2px solid #D9D9D9;
     margin-bottom: 10px;
     padding: 10px 20px; }
+  #register-box .city, #register-box .state, #register-box .zip {
+    display: inline-block;
+    width: 47%; }
   #register-box .submit-button {
     padding: 10px; }
   #register-box .button {
@@ -128,20 +129,31 @@
       background: #F19F4D;
       transition: all 0.5s ease-out; }
 
-.search-box input {
-  width: 90%;
-  font-size: 2rem;
-  border-radius: 20px;
-  padding: 2px 0 2px 15px;
-  border: none;
-  margin-top: 5px; }
-  .search-box input:focus {
-    outline: none; }
-
-.search-box .search-input {
-  color: #4484CE; }
-  .search-box .search-input::placeholder {
-    opacity: 0.5; }
+.search-box {
+  margin-top: 25px; }
+  .search-box input {
+    width: 50%;
+    font-size: 2rem;
+    padding: 2px 0 2px 15px;
+    border: none;
+    height: 75px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px; }
+    .search-box input:focus {
+      outline: none; }
+  .search-box .search-input {
+    color: #4484CE; }
+    .search-box .search-input::placeholder {
+      opacity: 0.5; }
+  .search-box .search {
+    background: #F19F4D;
+    color: #FFF;
+    border: none;
+    height: 75px;
+    width: 100px;
+    position: absolute;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px; }
 
 * {
   box-sizing: border-box; }

@@ -1,12 +1,15 @@
 .search-box {
+    margin-top: 25px;
 
     input {
-        width: 90%;
+        width: 50%;
         font-size: 2rem;
-        border-radius: 20px;
         padding: 2px 0 2px 15px;
         border: none;
-        margin-top: 5px;
+        height: 75px;
+
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
         
         &:focus {
             outline: none;
@@ -16,8 +19,18 @@
     .search-input {
         color: $primary-color;
         &::placeholder {
-            // color: $primary-color;
             opacity: 0.5;
         }
+    }
+
+    .search {
+        background: $fourth-color;
+        color: #FFF;
+        border: none;
+        height: 75px;
+        width: 100px;
+        position: absolute;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
     }
 }
