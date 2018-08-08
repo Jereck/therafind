@@ -73,14 +73,21 @@ app.get('/register', (req, res) => {
 });
 
 app.post('/register', (req, res) => {
-    // Create new therapy
+    let user = req.body.user;
     let therapy = req.body.therapy;
-    let sql = 'INSERT INTO therapies SET ?';
-    let query = db.query(sql, therapy, (err, result) => {
-        if (err) throw err;
-        console.log(result);
-        res.redirect('/');
-    });
+    if (req.body.therapy){
+        let sql = 'INSERT INTO therapies SET ?';
+        let query = db.query(sql, therapy, (err, result) => {
+            if (err) throw err;
+        });
+    }
+    if (req.body.user){
+        let sql = 'INSERT INTO users SET ?';
+        let query = db.query(sql, user, (err, result) => {
+            if (err) throw err;
+        });
+    }
+    res.redirect('/');
 });
 
 app.get('/login', (req, res) => {
@@ -101,14 +108,6 @@ app.get('/droptable', (req, res) => {
     db.query(sql, (err, result) => {
         if (err) throw err;
         res.send("Table deleted");
-    });
-});
-
-app.get('/addfield', (req, res) => {
-    var sql = "ALTER TABLE therapies ADD COLUMN repassword VARCHAR(255)";
-    db.query(sql, (err, result) => {
-        if (err) throw err;
-        res.send("RePassword column added to table");
     });
 });
 
