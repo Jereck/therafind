@@ -56,68 +56,21 @@ app.post('/search', (req, res) => {
 
 app.get('/contact', (req, res) => {
     res.render('contact');
-})
-
-// app.get('/therapies', (req, res) => {
-//     let therapies = 'SELECT * FROM therapies';
-//     let query = db.query(therapies, (err, result) => {
-//         if (err) throw err;
-//         res.render("therapies", {
-//             therapies: result
-//         });
-//     });
-// });
+});
 
 app.get('/register', (req, res) => {
     res.render("register");
 });
 
 app.post('/register', (req, res) => {
-    let user = req.body.user;
     let therapy = req.body.therapy;
-    if (req.body.therapy){
-        let sql = 'INSERT INTO therapies SET ?';
-        let query = db.query(sql, therapy, (err, result) => {
-            if (err) throw err;
-        });
-    }
-    if (req.body.user){
-        let sql = 'INSERT INTO users SET ?';
-        let query = db.query(sql, user, (err, result) => {
-            if (err) throw err;
-        });
-    }
-    res.redirect('/');
-});
 
-app.get('/login', (req, res) => {
-    res.render('login');
-});
-
-
-app.get('/createtable', (req, res) => {
-    var sql = 'CREATE TABLE therapies(id int AUTO_INCREMENT, name VARCHAR(255), street1 VARCHAR(255), street2 VARCHAR(255), city VARCHAR(255), state VARCHAR(255), zip VARCHAR(255), type VARCHAR(255), website VARCHAR(255), PRIMARY KEY(id))';
-    db.query(sql, (err, result) => {
+    let sql = 'INSERT INTO therapies SET ?';
+    let query = db.query(sql, therapy, (err, result) => {
         if (err) throw err;
-        res.send("Table created!");
+        res.redirect('/');
     });
 });
-
-app.get('/droptable', (req, res) => {
-    var sql = "DROP TABLE therapy";
-    db.query(sql, (err, result) => {
-        if (err) throw err;
-        res.send("Table deleted");
-    });
-});
-
-app.get('/gettherapy/:id', (req, res) => {
-    let sql = `SELECT * FROM therapies WHERE id = ${req.params.id}`;
-    let query = db.query(sql, (err, result) => {
-        if (err) throw err;
-        console.log(result);
-    })
-})
 
 
 app.listen('3000', () => {
