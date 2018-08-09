@@ -16,6 +16,7 @@ $background-opacity: 0.5;
             background: $home-image;
             background-attachment: fixed;
             background-size: cover;
+            min-height: 100vh;
 
             &:after {
                 content: '';

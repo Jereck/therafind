@@ -5,7 +5,8 @@
     position: relative;
 
     fieldset{
-        background: $primary-color;
+        background: white;
+        color: black;
         border: 0 none;
         border-radius: 3px;
         box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
@@ -117,18 +118,18 @@
             }
 
             &:nth-child(1):before {
-                content: '\f129';
-                font-family: 'FontAwesome';
+                content: '\f007';
+                font-family: 'Font Awesome 5 Free';
             }
 
             &:nth-child(2):before {
-                content: '\f013';
-                font-family: 'FontAwesome';
+                content: '\f2b9';
+                font-family: 'Font Awesome 5 Free';                
             }
 
             &:nth-child(3):before {
-                content: '\f00c';
-                font-family: 'FontAwesome';
+                content: '\f075';
+                font-family: 'Font Awesome 5 Free';
             }
         }
     }

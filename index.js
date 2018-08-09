@@ -46,7 +46,6 @@ app.post('/search', (req, res) => {
                 or zip = '${searchParam}'`;
     let query = db.query(sql, (err, results) => {
         if (err) throw err;
-        console.log(results);
         res.render('therapies', {
             therapies: results
         });
@@ -54,8 +53,8 @@ app.post('/search', (req, res) => {
     });
 });
 
-app.get('/contact', (req, res) => {
-    res.render('contact');
+app.get('/about', (req, res) => {
+    res.render('about');
 });
 
 app.get('/register', (req, res) => {
