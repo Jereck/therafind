@@ -213,6 +213,32 @@
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px; }
 
+#therapies {
+  min-height: 100vh; }
+  #therapies .no-therapy {
+    background: #FFF;
+    color: black;
+    padding: 2px 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4); }
+    #therapies .no-therapy p {
+      margin: 0; }
+  #therapies .card-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between; }
+    #therapies .card-container .card {
+      text-align: center;
+      width: 32%;
+      margin-bottom: 15px;
+      color: black;
+      background-color: #FFF;
+      border-radius: 5px 5px 0px 0px;
+      box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4), 0 0 15px 4px rgba(0, 0, 0, 0.25); }
+      #therapies .card-container .card img {
+        border-radius: 5px 5px 0px 0px;
+        max-width: 100%; }
+
 * {
   box-sizing: border-box; }
 
@@ -236,12 +262,12 @@ body {
       width: 100%;
       height: 100%;
       z-index: -1;
-      background: rgba(68, 132, 206, 0.5); }
+      background: rgba(68, 132, 206, 0.7); }
 
-h1, h2, h3 {
+h1, h2, h3, h4 {
   margin: 0;
   font-weight: 300; }
-  h1.lg-heading, h2.lg-heading, h3.lg-heading {
+  h1.lg-heading, h2.lg-heading, h3.lg-heading, h4.lg-heading {
     font-size: 6rem; }
 
 header {
@@ -268,19 +294,6 @@ main {
       margin-top: 20vh; }
   main#about .lg-heading {
     font-size: 4rem; }
-
-.therapy-info {
-  display: grid;
-  grid-gap: 0.7rem;
-  grid-template-columns: repeat(3, 1fr); }
-  .therapy-info .therapy {
-    background: #5891d3;
-    padding: 0.5rem;
-    border-bottom: #D9D9D9 5px solid; }
-    .therapy-info .therapy:hover {
-      opacity: 0.7;
-      border-color: #D9D9D9;
-      transition: all 0.5s ease-out; }
 
 @media screen and (min-width: 1171px) {
   .therapies {

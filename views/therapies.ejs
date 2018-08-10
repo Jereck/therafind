@@ -4,26 +4,23 @@
     <h1 class="lg-heading">
         Therapies
     </h1>
-    <h2 class="sm-heading">
-        A list of therapies in your area
-    </h2>
 
     <% if (therapies.length < 1) { %>
-        <p>There are no therapies to show.</p>
+        <div class="no-therapy">
+            <p>There are no therapies to show.</p>
+        </div>
     <% } else { %>
-        <div class="therapy-info">
+        <div class="card-container">
             <% therapies.forEach(function(therapy) { %>
-                <div class="therapy therapy-<%= therapy.id %>">
-                    <h4><%= therapy.name %></h4>
-                    <em><%= therapy.type %></em>
+                <div class="card">
+                    <img src="https://placeimg.com/620/240/any" alt="logo" class="logo">
+                    <h3 class="company-name"><%= therapy.name %></h3>
+                    <%= therapy.city %>, <%= therapy.state %>
                 </div>
-            <% }); %>
+            <% }); %>     
         </div>
     <% } %>
     
 </main>
-
-    
-
 
 <% include partials/footer %>

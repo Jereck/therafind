@@ -20,21 +20,38 @@ app.use(express.static(__dirname + "/views"));
 
 app.set("view engine", "ejs");
 
-//Create Connection
-const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '123456',
-    database: 'therapyapi'
+var db = mysql.createConnection({
+    host : 'therafindapi.cunofn8qnv7c.us-west-1.rds.amazonaws.com',
+    user : 'Jereck725',
+    password : 'stella1011',
+    port : '3306',
+    database : 'therafindapi'
 });
 
-// Connect
 db.connect((err) => {
     if (err) {
-        throw err;
+        console.log('Database connection failed: ' + err.stack);
+        return;
     }
-    console.log("MySql Connected");
+
+    console.log('Connected to database');
 });
+
+// //Create Connection
+// const db = mysql.createConnection({
+//     host: 'localhost',
+//     user: 'root',
+//     password: '123456',
+//     database: 'therapyapi'
+// });
+
+// // Connect
+// db.connect((err) => {
+//     if (err) {
+//         throw err;
+//     }
+//     console.log("Database Connected");
+// });
 
 app.get('/', (req, res) => {
     res.render('index');
@@ -51,7 +68,7 @@ app.post('/search', (req, res) => {
         res.render('therapies', {
             therapies: results
         });
-
+        console.log(results);
     });
 });
 
