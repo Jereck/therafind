@@ -4,7 +4,11 @@
     <h1 class="lg-heading">
         <%= user.username %>
     </h1>
-    <%= user %>
+
+    <% therapies.forEach(function(therapy) { %>
+        <p><%= therapy.companyName %></p>
+    <% }) %>
+
     <% if (!user.isPro) { %>
         <a href="/basic-setup">Basic Set Up</a>
     <% } else { %>

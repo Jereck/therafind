@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: "Therapy"
         },
-        comapnyName: String,
+        companyName: String,
     },
     createdAt: {
         type: Date,
