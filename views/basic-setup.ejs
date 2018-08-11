@@ -5,14 +5,28 @@
         Basic Setup
     </h1>
 
-    <form action="/basic-therapy-register" method="POST">
-        <input type="text" name="companyName" placeholder="Company Name">
-        <input type="text" name="address" placeholder="Address">
-        <input type="text" name="city" placeholder="City">
-        <input type="text" name="state" placeholder="State">
-        <input type="text" name="zip" placeholder="Zip Code">
-        <input type="submit" value="Submit">
-    </form>
+    <div class="therapy-register-form">
+        <form action="/basic-therapy-register" method="POST">
+            <div class="form-group">
+                <input type="text" name="companyName" placeholder="Company Name">
+            </div>
+            <div class="form-group">
+                <input type="text" name="address" placeholder="Address">
+            </div>
+            <div class="form-group">
+                <input type="text" name="city" placeholder="City">
+            </div>
+            <div class="form-group">
+                <input type="text" name="state" placeholder="State">
+            </div>
+            <div class="form-group">
+                <input type="text" name="zip" placeholder="Zip Code">
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Submit">
+            </div>
+        </form>
+    </div> 
 </main>
 
 <% include partials/footer %>

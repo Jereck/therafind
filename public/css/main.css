@@ -205,6 +205,39 @@
         box-shadow: 0px 0px 10px #424242;
         z-index: 1; }
 
+.therapy-register-form {
+  width: 75%;
+  border: 1px solid white;
+  padding: 20px;
+  background: white;
+  box-sizing: border-box;
+  box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+  border-radius: 5px;
+  margin: 0 auto; }
+  .therapy-register-form .form-group input[type=text], .therapy-register-form .form-group input[type=email] {
+    background: #f1f1f1;
+    width: 100%;
+    padding: 15px 0;
+    border: none;
+    margin-bottom: 10px;
+    text-indent: 30px; }
+  .therapy-register-form .form-group input[type=submit] {
+    margin-top: 10px;
+    background: #F19F4D;
+    border: none;
+    padding: 10px 0;
+    text-align: center;
+    width: 100%;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s ease;
+    -webkit-transition: 0.3s ease;
+    -moz-transition: 0.3s ease;
+    -ms-transition: 0.3s ease; }
+    .therapy-register-form .form-group input[type=submit]:hover {
+      background: #4484CE; }
+
 #basic-reg {
   background: #fff;
   box-sizing: border-box;
