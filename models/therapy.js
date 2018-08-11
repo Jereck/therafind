@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const therapySchema = new mongoose.Schema({
+    email: String, 
     name: String,
     street1: String,
     street2: String,
@@ -9,13 +10,6 @@ const therapySchema = new mongoose.Schema({
     zip: String,
     type: String,
     website: String,
-    owner: {
-        id: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "User"
-        },
-        username: String
-    }
 });
 
 module.exports = mongoose.model("Therapy", therapySchema);

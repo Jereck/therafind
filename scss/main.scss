@@ -1,14 +1,17 @@
 @import 'config';
 @import 'menu';
-@import 'reg';
 @import 'searchbar';
 @import 'therapylist';
+@import 'pricetable';
+@import 'basic';
 
 @import url('https://fonts.googleapis.com/css?family=Montserrat:100,300,400,700');
 
 
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
@@ -66,6 +69,10 @@ main {
         .lg-heading {
             font-size: 4rem;
         }
+    }
+
+    #options {
+        
     }
 }
 

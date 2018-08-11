@@ -73,6 +73,10 @@ app.post('/search', (req, res) => {
     )
 });
 
+app.get('/options', (req,res) => {
+    res.render('options');
+});
+
 app.get('/about', (req, res) => {
     res.render('about');
 });
@@ -82,32 +86,29 @@ app.get('/therapy/:id', (req, res) => {
         if (err) {
             console.log(err);
         } else {
+            console.log(req.user);
             res.render("show", {therapy: foundTherapy});
         }
     });
 });
 
 app.get('/register', (req, res) => {
-    res.render("register");
+    res.render("options");
+});
+
+app.get('/register/:tagId', (req, res) => {
+    if (req.params.tagId == 'basic') {
+        res.render("basic-register");
+    }
+    if (req.params.tagId == 'pro') {
+        res.render("pro-register");
+    }
 });
 
 app.post('/register', (req, res) => {
     let therapy = req.body.therapy;
-    let user = req.body.user;
 
-    let newUser = new User({ username: req.body.user.email });
-
-    User.register(newUser, req.body.user.password, (err, user) => {
-        if (err) {
-            console.log(err);
-            return res.render("/register");
-        }
-        passport.authenticate("local")(req, res, () => {
-            res.redirect("/");
-        });
-    });
-
-    Therapy.create(therapy, user, (err, newlyCreated) => {
+    Therapy.create(therapy, (err, newlyCreated) => {
         if (err) {
             console.log(err);
         } else {
@@ -135,3 +136,10 @@ app.get('/logout', (req, res) => {
 app.listen(port, () => {
     console.log("Server started on port: " + port);
 });
+
+function isLoggedIn(req, res, next){
+    if (req.isAuthenticated()){
+        return next();
+    }
+    res.redirect('/login');
+}
