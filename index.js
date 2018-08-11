@@ -7,9 +7,15 @@ const   express         = require('express'),
         crypto          = require('crypto'),
         sess            = require('express-session'),
         LocalStrategy   = require('passport-local'),
+
+        Therapy         = require('./models/therapy'),
+        User            = require('./models/user'),
         app             = express();
 
 var port = process.env.PORT || 3000;
+
+// MONGOOSE
+mongoose.connect('mongodb://Jereck:stella1011@ds119422.mlab.com:19422/therafind')
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -21,29 +27,6 @@ app.use(express.static(__dirname + "/views"));
 
 app.set("view engine", "ejs");
 
-// MONGOOSE
-mongoose.connect('mongodb://Jereck:stella1011@ds119422.mlab.com:19422/therafind')
-// SCHEMA SETUP
-const therapySchema = new mongoose.Schema({
-    email: String,
-    password: String,
-    name: String,
-    street1: String,
-    street2: String,
-    city: String,
-    state: String,
-    zip: String,
-    type: String,
-    website: String
-});
-
-const userSchema = new mongoose.Schema({
-    email: String,
-    password: String
-});
-
-const Therapy = mongoose.model("Therapy", therapySchema);
-const User = mongoose.model("User", userSchema);
 
 app.get('/', (req, res) => {
     res.render('index');
@@ -72,7 +55,6 @@ app.post('/search', (req, res) => {
             if (err) {
                 console.log(err);
             } else {
-                console.log(therapies);
                 res.render("therapies", {therapies: therapies});
             }
         }
@@ -82,6 +64,16 @@ app.post('/search', (req, res) => {
 app.get('/about', (req, res) => {
     res.render('about');
 });
+
+app.get('/therapy/:id', (req, res) => {
+    Therapy.findById(req.params.id, (err, foundTherapy) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.render("show", {therapy: foundTherapy});
+        }
+    })
+})
 
 app.get('/register', (req, res) => {
     res.render("register");
