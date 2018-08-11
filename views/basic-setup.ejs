@@ -1,0 +1,18 @@
+<% include partials/header %>
+
+<main id="basic">
+    <h1 class="lg-heading">
+        Basic Setup
+    </h1>
+
+    <form action="/basic-therapy-register" method="POST">
+        <input type="text" name="companyName" placeholder="Company Name">
+        <input type="text" name="address" placeholder="Address">
+        <input type="text" name="city" placeholder="City">
+        <input type="text" name="state" placeholder="State">
+        <input type="text" name="zip" placeholder="Zip Code">
+        <input type="submit" value="Submit">
+    </form>
+</main>
+
+<% include partials/footer %>

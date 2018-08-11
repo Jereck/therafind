@@ -26,7 +26,11 @@
             <nav class="menu">
                 <div class="menu-branding">
                     <div class="portrait">
-        
+                        <% if (currentUser) { %>
+                            <h1>
+                                Welcome, <%= currentUser.username %>!
+                            </h1>
+                        <% } %>
                     </div>
                 </div>
                 <ul class="menu-nav">
@@ -40,11 +44,29 @@
                             About
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="/register" class="nav-link">
-                            Register
-                        </a>
-                    </li>
+                    <% if (!currentUser) { %>
+                        <li class="nav-item">
+                            <a href="/register" class="nav-link">
+                                Register
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/login" class="nav-link">
+                                Login
+                            </a>
+                        </li>
+                    <% } else { %>
+                        <li class="nav-item">
+                            <a href="/profile/<%= currentUser._id %>" class="nav-link">
+                                Profile
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/logout" class="nav-link">
+                                Log Out
+                            </a>
+                        </li>
+                    <% } %>
                 </ul>
             </nav>
         </header>

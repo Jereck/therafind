@@ -1,15 +1,26 @@
 const mongoose = require('mongoose');
 
 const therapySchema = new mongoose.Schema({
-    email: String, 
-    name: String,
-    street1: String,
-    street2: String,
+    companyName: String,
+    address: String,
     city: String,
     state: String,
     zip: String,
-    type: String,
     website: String,
+    description: String,
+    phone: String,
+    email: String,
+    user: {
+        id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
+        },
+        username: String,
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }
 });
 
 module.exports = mongoose.model("Therapy", therapySchema);

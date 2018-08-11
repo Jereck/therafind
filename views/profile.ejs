@@ -1,0 +1,16 @@
+<% include partials/header %>
+
+<main id="profile">
+    <h1 class="lg-heading">
+        <%= user.username %>
+    </h1>
+    <%= user %>
+    <% if (!user.isPro) { %>
+        <a href="/basic-setup">Basic Set Up</a>
+    <% } else { %>
+        <a href="/pro-setup">Pro Setup</a>
+    <% } %>
+    
+</main>
+
+<% include partials/footer %>

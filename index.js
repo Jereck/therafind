@@ -1,11 +1,10 @@
 const   express         = require('express'),
-        mysql           = require('mysql'),
         bodyParser      = require('body-parser'),
         mongoose        = require('mongoose'),
         passport        = require('passport'),
         LocalStrategy   = require('passport-local'),
 
-        Therapy         = require('./models/therapy'),
+        Therapy    = require('./models/therapy'),
         User            = require('./models/user'),
         app             = express();
 
@@ -40,8 +39,21 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+app.use((req, res, next) => {
+    res.locals.currentUser = req.user;
+    next();
+});
+
 app.get('/', (req, res) => {
     res.render('index');
+});
+
+app.get('/about', (req, res) => {
+    res.render('about');
+});
+
+app.get('/register', (req, res) => {
+    res.render("options");
 });
 
 app.get("/therapies", (req, res) => {
@@ -73,27 +85,74 @@ app.post('/search', (req, res) => {
     )
 });
 
-app.get('/options', (req,res) => {
-    res.render('options');
-});
-
-app.get('/about', (req, res) => {
-    res.render('about');
-});
-
 app.get('/therapy/:id', (req, res) => {
     Therapy.findById(req.params.id, (err, foundTherapy) => {
         if (err) {
             console.log(err);
         } else {
-            console.log(req.user);
             res.render("show", {therapy: foundTherapy});
         }
     });
 });
 
-app.get('/register', (req, res) => {
-    res.render("options");
+
+// BASIC USER REGISTRATION
+app.post('/b-user-reg', (req, res) => {
+    var newUser = new User(
+        {
+            username: req.body.username, 
+            email: req.body.email,
+            isPro: false
+        }
+    );
+    User.register(newUser, req.body.password, (err, user) => {
+        if(err){
+            console.log(err);
+            return res.render("basic-register");
+        }
+        passport.authenticate("local")(req, res, () => {
+            res.redirect("/basic-setup");
+        });
+    });
+});
+
+// PRO USER REGISTRATION
+app.post('/p-user-reg', (req, res) => {
+    var newUser = new User(
+        {
+            username: req.body.username, 
+            email: req.body.email,
+            isPro: true,
+        }
+    );
+    User.register(newUser, req.body.password, (err, user) => {
+        if(err){
+            console.log(err);
+            return res.render("pro-register");
+        }
+        passport.authenticate("local")(req, res, () => {
+            res.redirect("/pro-setup");
+        });
+    });
+});
+
+app.get("/basic-setup", (req, res) => {
+    res.render("basic-setup");
+});
+
+app.get('/pro-setup', (req, res) => {
+    res.render("pro-setup");
+})
+
+app.get("/profile/:id", isLoggedIn, (req, res) => {
+    User.findById(req.params.id, (err, foundUser) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(foundUser);
+            res.render("profile", {user: foundUser});
+        }
+    });
 });
 
 app.get('/register/:tagId', (req, res) => {
@@ -105,27 +164,46 @@ app.get('/register/:tagId', (req, res) => {
     }
 });
 
-app.post('/register', (req, res) => {
-    let therapy = req.body.therapy;
+app.post('/basic-therapy-register', isLoggedIn, (req, res) => {
+    let therapy = req.body;
 
     Therapy.create(therapy, (err, newlyCreated) => {
         if (err) {
             console.log(err);
         } else {
+            newlyCreated.user.id = req.user._id;
+            newlyCreated.user.username = req.user.username;
+
             res.redirect("/");
         }
     });
 });
 
+app.post('/pro-therapy-register', isLoggedIn, (req, res) => {
+    let therapy = req.body;
+
+    Therapy.create(therapy, (err, newlyCreated) => {
+        if (err) {
+            console.log(err);
+        } else {
+            newlyCreated.user.id = req.user._id;
+            newlyCreated.user.username = req.user.username
+
+            res.redirect("/");
+        }
+    });
+});
+
+
+
+// LOGIN/LOG OUT LOGIC
 app.get('/login', (req, res) => {
     res.render('login');
 });
 
-app.post('/login', passport.authenticate("local", 
-    {
-        successRedirect: "/",
-        failureRedirect: "/login"
-    }), (req, res) => {
+app.post('/login', passport.authenticate("local", { failureRedirect: '/login' }),
+    (req, res) => {
+        res.redirect('/profile/' + req.user.id);
 });
 
 app.get('/logout', (req, res) => {
