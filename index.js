@@ -1,12 +1,13 @@
-const express = require('express'),
-    mysql = require('mysql'),
-    bodyParser = require('body-parser'),
-    passport = require('passport'),
-    flash = require('connect-flash'),
-    crypto = require('crypto'),
-    sess = require('express-session'),
-    LocalStrategy = require('passport-local'),
-    app = express();
+const   express         = require('express'),
+        mysql           = require('mysql'),
+        bodyParser      = require('body-parser'),
+        mongoose        = require('mongoose'),
+        passport        = require('passport'),
+        flash           = require('connect-flash'),
+        crypto          = require('crypto'),
+        sess            = require('express-session'),
+        LocalStrategy   = require('passport-local'),
+        app             = express();
 
 var port = process.env.PORT || 3000;
 
@@ -20,56 +21,62 @@ app.use(express.static(__dirname + "/views"));
 
 app.set("view engine", "ejs");
 
-var db = mysql.createConnection({
-    host : 'therafindapi.cunofn8qnv7c.us-west-1.rds.amazonaws.com',
-    user : 'Jereck725',
-    password : 'stella1011',
-    port : '3306',
-    database : 'therafindapi'
+// MONGOOSE
+mongoose.connect('mongodb://Jereck:stella1011@ds119422.mlab.com:19422/therafind')
+// SCHEMA SETUP
+const therapySchema = new mongoose.Schema({
+    email: String,
+    password: String,
+    name: String,
+    street1: String,
+    street2: String,
+    city: String,
+    state: String,
+    zip: String,
+    type: String,
+    website: String
 });
 
-db.connect((err) => {
-    if (err) {
-        console.log('Database connection failed: ' + err.stack);
-        return;
-    }
-
-    console.log('Connected to database');
+const userSchema = new mongoose.Schema({
+    email: String,
+    password: String
 });
 
-// //Create Connection
-// const db = mysql.createConnection({
-//     host: 'localhost',
-//     user: 'root',
-//     password: '123456',
-//     database: 'therapyapi'
-// });
-
-// // Connect
-// db.connect((err) => {
-//     if (err) {
-//         throw err;
-//     }
-//     console.log("Database Connected");
-// });
+const Therapy = mongoose.model("Therapy", therapySchema);
+const User = mongoose.model("User", userSchema);
 
 app.get('/', (req, res) => {
     res.render('index');
 });
 
+app.get("/therapies", (req, res) => {
+    Therapy.find({}, (err, therapies) =>{
+        if(err) {
+            console.log(err);
+        } else {
+            res.render("therapies", {therapies: therapies})
+        }
+    });
+});
+
 app.post('/search', (req, res) => {
     let searchParam = req.body.search;
-    let sql = `SELECT * FROM therapies WHERE 
-                state = '${searchParam}'
-                or city ='${searchParam}'
-                or zip = '${searchParam}'`;
-    let query = db.query(sql, (err, results) => {
-        if (err) throw err;
-        res.render('therapies', {
-            therapies: results
-        });
-        console.log(results);
-    });
+    Therapy.find(
+        {
+            $or: [
+                { state: searchParam },
+                { city: searchParam },
+                { zip: searchParam }
+            ]
+        }, (err, therapies) => {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log(therapies);
+                res.render("therapies", {therapies: therapies});
+            }
+        }
+    )
 });
 
 app.get('/about', (req, res) => {
@@ -82,14 +89,16 @@ app.get('/register', (req, res) => {
 
 app.post('/register', (req, res) => {
     let therapy = req.body.therapy;
+    let user = req.body.user;
 
-    let sql = 'INSERT INTO therapies SET ?';
-    let query = db.query(sql, therapy, (err, result) => {
-        if (err) throw err;
-        res.redirect('/');
+    Therapy.create(therapy, user, (err, newlyCreated) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.redirect("/");
+        }
     });
 });
-
 
 app.listen(port, () => {
     console.log("Server started on port: " + port);
