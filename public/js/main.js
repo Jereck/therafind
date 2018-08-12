@@ -55,8 +55,14 @@ window.onload = () => {
                 .then(function(response){
                     console.log(response);
 
-                    var formattedAddress = response.data.results[0].address_components[3].long_name;
-                    output.value = formattedAddress;
+                    for (let i = 0; i < response.data.results[0].address_components.length; i++) {
+                        for (let b = 0; b < response.data.results[0].address_components[i].types.length; b++){
+                            if (response.data.results[0].address_components[i].types[b] == 'locality') {
+                                city = response.data.results[0].address_components[i];
+                                output.value = city.long_name;
+                            }
+                        }
+                    }
                 })
                 .catch(function(err){
                     console.log(err);
@@ -65,49 +71,3 @@ window.onload = () => {
         });
     }
 }
-
-// window.onload = () => {
-//     var geocoder = new google.maps.Geocoder
-//     var output = document.getElementById("search-input");
-
-//     if(!navigator.geolocation) {
-//         output.placeholder = "Enter your location";
-//         return;
-//     }
-
-//     function success(position) {
-//         var latitude = position.coords.latitude;
-//         var longitude = position.coords.longitude;
-
-//         codeLatLng(latitude, longitude);
-//     }
-
-//     function error() {
-//         output.placeholder = "Unable to retrieve your location";
-//     }
-
-    // function codeLatLng(lat, lng) {
-    //     var latlng = new google.maps.LatLng(lat, lng);
-    //     geocoder.geocode({'latLng': latlng}, (results, status) => {
-    //         if (status == google.maps.GeocoderStatus.OK) {
-    //             if (results[1]) {
-    //                 for (var i = 0; i < results[0].address_components.length; i++) {
-    //                     for (var b = 0; b < results[0].address_components[i].types.length; b++) {
-    //                         if (results[0].address_components[i].types[b] == "locality") {
-    //                             //this is the object you are looking for
-    //                             city= results[0].address_components[i];
-    //                             output.value= city.long_name;
-    //                             break;
-    //                         }
-    //                     }
-    //                 }
-    //             } else {
-    //                 alert("No results found");
-    //             }
-    //         } else {
-    //             alert("Geocoder failed due to: " + status);
-    //         }
-    //     });
-    // }  
-//     navigator.geolocation.getCurrentPosition(success, error);
-// }
