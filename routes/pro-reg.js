@@ -2,8 +2,8 @@ const   express     = require('express'),
         passport    = require('passport'),
         Therapy     = require('../models/therapy'),
         User        = require('../models/user'),
+        stripe      = require('stripe')('sk_test_LmFARXcxDCRwRUrFTVxB7L3Y'),
         router      = express.Router();
-
 
 // PRO USER REGISTRATION
 router.post('/p-user-reg', (req, res) => {
@@ -14,6 +14,7 @@ router.post('/p-user-reg', (req, res) => {
             isPro: true,
         }
     );
+
     User.register(newUser, req.body.password, (err, user) => {
         if(err){
             console.log(err);

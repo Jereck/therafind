@@ -1,5 +1,4 @@
 // Select items from the DOM
-
 const menuBtn = document.querySelector('.menu-btn');
 const menu = document.querySelector('.menu');
 const menuNav = document.querySelector('.menu-nav');
@@ -34,8 +33,8 @@ function toggleMenu() {
 }
 
 window.onload = () => {
-    var geocoder = new google.maps.Geocoder
     var output = document.getElementById("search-input");
+    var geocoder = new google.maps.Geocoder();
 
     if(navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) => {
@@ -43,6 +42,7 @@ window.onload = () => {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
             };
+            var radius = 1000;
 
             geocode();
             
@@ -53,8 +53,6 @@ window.onload = () => {
                     }
                 })
                 .then(function(response){
-                    console.log(response);
-
                     for (let i = 0; i < response.data.results[0].address_components.length; i++) {
                         for (let b = 0; b < response.data.results[0].address_components[i].types.length; b++){
                             if (response.data.results[0].address_components[i].types[b] == 'locality') {

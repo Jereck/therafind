@@ -339,6 +339,9 @@ main {
       margin-top: 20vh; }
   main#about .lg-heading {
     font-size: 4rem; }
+  main#profile {
+    background: #4484CE;
+    min-height: 100vh; }
 
 @media screen and (min-width: 1171px) {
   .therapies {

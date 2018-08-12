@@ -10,6 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@google/maps": "^0.5.5",
+    "ajv": "^6.5.2",
     "aws-sdk": "^2.289.0",
     "body-parser": "^1.18.3",
     "connect-flash": "^0.1.1",
@@ -26,6 +28,7 @@
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^5.0.1",
     "react": "^16.4.2",
-    "react-dom": "^16.4.2"
+    "react-dom": "^16.4.2",
+    "stripe": "^6.7.0"
   }
 }
