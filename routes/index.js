@@ -43,6 +43,4 @@ router.get('/register/:tagId', (req, res) => {
     }
 });
 
-
-
 module.exports = router;

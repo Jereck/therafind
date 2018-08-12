@@ -37,44 +37,77 @@ window.onload = () => {
     var geocoder = new google.maps.Geocoder
     var output = document.getElementById("search-input");
 
-    if(!navigator.geolocation) {
-        output.placeholder = "Enter your location";
-        return;
-    }
+    if(navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+            var pos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
 
-    function success(position) {
-        var latitude = position.coords.latitude;
-        var longitude = position.coords.longitude;
-
-        codeLatLng(latitude, longitude);
-    }
-
-    function error() {
-        output.placeholder = "Unable to retrieve your location";
-    }
-
-    function codeLatLng(lat, lng) {
-        var latlng = new google.maps.LatLng(lat, lng);
-        geocoder.geocode({'latLng': latlng}, (results, status) => {
-            if (status == google.maps.GeocoderStatus.OK) {
-                if (results[1]) {
-                    for (var i = 0; i < results[0].address_components.length; i++) {
-                        for (var b = 0; b < results[0].address_components[i].types.length; b++) {
-                            if (results[0].address_components[i].types[b] == "locality") {
-                                //this is the object you are looking for
-                                city= results[0].address_components[i];
-                                output.value= city.long_name;
-                                break;
-                            }
-                        }
+            geocode();
+            
+            function geocode() {
+                axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${pos.lat},${pos.lng}`, {
+                    params: {
+                        key: 'AIzaSyAgg_uxi9IJH7uwyEyH0sAUgfCqWUsznos'
                     }
-                } else {
-                    alert("No results found");
-                }
-            } else {
-                alert("Geocoder failed due to: " + status);
+                })
+                .then(function(response){
+                    console.log(response);
+
+                    var formattedAddress = response.data.results[0].address_components[3].long_name;
+                    output.value = formattedAddress;
+                })
+                .catch(function(err){
+                    console.log(err);
+                })
             }
         });
-    }  
-    navigator.geolocation.getCurrentPosition(success, error);
+    }
 }
+
+// window.onload = () => {
+//     var geocoder = new google.maps.Geocoder
+//     var output = document.getElementById("search-input");
+
+//     if(!navigator.geolocation) {
+//         output.placeholder = "Enter your location";
+//         return;
+//     }
+
+//     function success(position) {
+//         var latitude = position.coords.latitude;
+//         var longitude = position.coords.longitude;
+
+//         codeLatLng(latitude, longitude);
+//     }
+
+//     function error() {
+//         output.placeholder = "Unable to retrieve your location";
+//     }
+
+    // function codeLatLng(lat, lng) {
+    //     var latlng = new google.maps.LatLng(lat, lng);
+    //     geocoder.geocode({'latLng': latlng}, (results, status) => {
+    //         if (status == google.maps.GeocoderStatus.OK) {
+    //             if (results[1]) {
+    //                 for (var i = 0; i < results[0].address_components.length; i++) {
+    //                     for (var b = 0; b < results[0].address_components[i].types.length; b++) {
+    //                         if (results[0].address_components[i].types[b] == "locality") {
+    //                             //this is the object you are looking for
+    //                             city= results[0].address_components[i];
+    //                             output.value= city.long_name;
+    //                             break;
+    //                         }
+    //                     }
+    //                 }
+    //             } else {
+    //                 alert("No results found");
+    //             }
+    //         } else {
+    //             alert("Geocoder failed due to: " + status);
+    //         }
+    //     });
+    // }  
+//     navigator.geolocation.getCurrentPosition(success, error);
+// }

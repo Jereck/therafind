@@ -69,6 +69,10 @@ app.get('/logout', (req, res) => {
     res.redirect('/');
 });
 
+app.get('/getlocation', (req, res) => {
+    
+})
+
 app.listen(port, () => {
     console.log("Server started on port: " + port);
 });
