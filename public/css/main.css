@@ -151,6 +151,9 @@
 .cf, .wrap-options .pricing-table {
   zoom: 1; }
 
+#options {
+  overflow: hidden; }
+
 .wrap-options {
   width: 900px;
   color: #607d8b;
